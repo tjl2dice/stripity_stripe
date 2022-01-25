@@ -25,7 +25,8 @@ defmodule Stripe.Connect.OAuth do
     :scope,
     :state,
     :stripe_landing,
-    :stripe_user
+    :stripe_user,
+    :suggested_capabilities
   ]
 
   defmodule AuthorizeResponse do
