@@ -444,7 +444,7 @@ defmodule Stripe.API do
       |> decompress_body(headers)
       |> json_library().decode!()
 
-    Logger.info("JSON response:\n#{decoded_body}")
+    Logger.debug("JSON response:\n#{decoded_body}")
 
     {:ok, decoded_body}
   end
