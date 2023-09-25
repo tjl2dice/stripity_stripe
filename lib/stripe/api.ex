@@ -5,6 +5,7 @@ defmodule Stripe.API do
   Usually the utilities in `Stripe.Request` are a better way to write custom interactions with
   the API.
   """
+  require Logger
   alias Stripe.{Config, Error}
 
   @callback oauth_request(method, String.t(), map) :: {:ok, map}
@@ -447,6 +448,8 @@ defmodule Stripe.API do
       body
       |> decompress_body(headers)
       |> json_library().decode!()
+
+    Logger.info("Stripe JSON response:\n#{inspect(decoded_body)}")
 
     {:ok, decoded_body}
   end
