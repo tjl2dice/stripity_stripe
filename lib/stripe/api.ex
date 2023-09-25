@@ -444,12 +444,11 @@ defmodule Stripe.API do
 
   @spec handle_response(http_success | http_failure) :: {:ok, map} | {:error, Stripe.Error.t()}
   defp handle_response({:ok, status, headers, body}) when status >= 200 and status <= 299 do
+    Logger.info("Stripe JSON response:\n#{inspect(decompress_body(body, headers))}")
     decoded_body =
       body
       |> decompress_body(headers)
       |> json_library().decode!()
-
-    Logger.info("Stripe JSON response:\n#{inspect(decoded_body)}")
 
     {:ok, decoded_body}
   end
